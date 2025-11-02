@@ -5,8 +5,8 @@ from langchain_core.runnables import RunnableSequence
 from langchain_openai import OpenAI
 import telebot
 
-os.environ["OPENAI_API_KEY"] = "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"
-os.environ["LANGCHAIN_API_KEY"] = "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"
+os.environ["OPENAI_API_KEY"]
+os.environ["LANGCHAIN_API_KEY"] 
 os.environ["GRADIO_SERVER_PORT"] = "7860"
 
 BOT_TOKEN = "8237121982:AAFsncQFiITISITS58Qdd58bHytWPcJAKtQ"
