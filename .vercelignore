@@ -1,0 +1,11 @@
+pycache
+*.pyc
+*.pyo
+*.pyd
+.env
+.git
+node_modules
+venv
+*.egg-info
+build
+dist
