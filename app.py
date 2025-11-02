@@ -106,4 +106,4 @@ import uvicorn
 app = FastAPI()
 gr.mount_gradio_app(app, demo, path="/")
 if __name__ == "main":
-    uvicorn.run(app, host="0.0.0.0", port=3000, reload=True)
+    uvicorn.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 3000)), reload=False)
