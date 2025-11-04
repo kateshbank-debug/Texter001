@@ -1,0 +1,19 @@
+name: Deploy to Yandex
+on:
+  push:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Login to Yandex Registry
+      uses: yc-actions/yc-cr-login@v1
+      with:
+        yc-sa-json-credentials: ${{ secrets.YC_SA_JSON }}
+        registry-id: ${{ secrets.REGISTRY_ID }}
+    - name: Build and Push
+      uses: docker/build-push-action@v5
+      with:
+        push: true
+        tags: cr.yandex/${{ secrets.REGISTRY_ID }}/texter-ru:latest
