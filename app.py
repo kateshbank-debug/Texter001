@@ -8,13 +8,17 @@ import logging; logging.basicConfig(level=logging.DEBUG)
 import requests
 from fastapi import FastAPI
 
-os.environ["OPENAI_API_KEY"]
-os.environ["LANGCHAIN_API_KEY"] 
-os.environ["BOT_TOKEN"]
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+LANGCHAIN_API_KEY = os.getenv("LANGCHAIN_API_KEY")
+BOT_TOKEN = os.getenv("BOT_TOKEN")
 
-BOT_TOKEN = os.environ["BOT_TOKEN"]
-CHANNEL = "@Texter_Channel_test"
-bot = telebot.TeleBot(os.environ["BOT_TOKEN"])
+if not all([OPENAI_API_KEY, LANGCHAIN_API_KEY, BOT_TOKEN]):
+    raise ValueError("Установите переменные окружения: OPENAI_API_KEY, LANGCHAIN_API_KEY, BOT_TOKEN")
+
+os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
+os.environ["LANGCHAIN_API_KEY"] = LANGCHAIN_API_KEY
+
+bot = telebot.TeleBot(BOT_TOKEN)
 
 generations = 0
 MAX_FREE = 5
@@ -105,5 +109,5 @@ with gr.Blocks() as demo:
 import uvicorn
 app = FastAPI()
 gr.mount_gradio_app(app, demo, path="/")
-if __name__ == "main":
-    uvicorn.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 3000)), reload=False)
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 8000)))
